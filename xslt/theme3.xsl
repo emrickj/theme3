@@ -42,15 +42,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-		<xsl:for-each select="website/page">
-		 <xsl:if test="string-length(name) &gt; 2">
-			 <li>
-			   <a href="#p{position()}">
-			   <xsl:value-of select="name" disable-output-escaping="yes" />
-			   </a>
-			 </li>
-		 </xsl:if>
-		</xsl:for-each>
+		<xsl:apply-templates select="website/page" />
         </ul>
       </div>
     </div>
@@ -109,6 +101,16 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
+</xsl:template>
+
+<xsl:template match="page">
+	 <xsl:if test="string-length(name) &gt; 2">
+		 <li>
+		   <a href="#p{position()}">
+		   <xsl:value-of select="name" disable-output-escaping="yes" />
+		   </a>
+		 </li>
+	 </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>
