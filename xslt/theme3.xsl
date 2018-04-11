@@ -107,7 +107,15 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	 <xsl:if test="string-length(name) &gt; 2">
 		 <li>
 		   <a href="#p{position()}">
-		   <xsl:value-of select="name" disable-output-escaping="yes" />
+			<xsl:choose>
+				<xsl:when test="substring(name,2,1)=' '">
+				   <i class="fa"><xsl:value-of select="substring(name,1,1)" /></i>
+				   <xsl:value-of select="substring(name,2)" />
+				</xsl:when>
+				<xsl:otherwise>
+				   <xsl:value-of select="name" disable-output-escaping="yes" />
+				</xsl:otherwise>
+			</xsl:choose>
 		   </a>
 		 </li>
 	 </xsl:if>
