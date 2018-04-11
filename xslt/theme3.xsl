@@ -5,14 +5,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:output method="html" doctype-system="about:legacy-compat" encoding="utf-8" indent="yes" />
 
-<xsl:template match="/">
+<xsl:template match="website">
 <html>
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-	<title><xsl:value-of select="website/title"/></title>
+	<title><xsl:value-of select="title"/></title>
   <style>
   body {
       position: relative; 
@@ -23,9 +23,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   #p4 {padding-top:50px;color: #fff; background-color: #ff9800;}
   #p5 {padding-top:50px;color: #fff; background-color: #00bcd4;}
   #p6 {padding-top:50px;color: #fff; background-color: #009688;}
-
-
-     </style>
+  <xsl:value-of select="style" disable-output-escaping="yes" />
+  </style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
@@ -37,19 +36,19 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#"><xsl:value-of select="website/title"/></a>
+      <a class="navbar-brand" href="#"><xsl:value-of select="title"/></a>
     </div>
     <div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-		<xsl:apply-templates select="website/page" />
+		<xsl:apply-templates select="page" />
         </ul>
       </div>
     </div>
   </div>
 </nav>
 
-<xsl:for-each select="website/page">
+<xsl:for-each select="page">
   <xsl:if test="string-length(name) &gt; 2">
 	<div id="p{position()}" class='container-fluid' lang="{@language}">
 		<img class='img-responsive' style='display: block;margin: auto;' src='{image}' />
